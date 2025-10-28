@@ -1,0 +1,69 @@
+import java.util.Scanner;
+class Quiz
+{
+    public static void main(String[] a) //Runs the program
+    {
+        quiz_level_3();
+    }
+
+    public static void print(String message) //shortens the print function for programming simplicity
+    {
+        System.out.println(message);
+        return;
+    }
+
+    public static void welcome_screen() //shows the rules to the user 
+    {
+        final String name = get_user_input("Hi my name is Lexi, I will be your quizbot for this quiz.\nThe rules for the quiz are that you start with a given amount of winnings. For every correct answer your winnings double. For every incorrect answer your winnings half.\nWhats your name?");
+        print("Hello "+name+" its lovely to meet you.\nLets get started!!");
+        return;
+    }
+
+    public static String get_user_input(String message) //gets the user's inputs to somplify future code
+    {
+        Scanner scanner = new Scanner(System.in);
+        print(message);
+        return scanner.nextLine();
+    }
+
+    public static Double ask_question(String question,String answer,Double money) //asks the user a the question seeing if there answer is correct, editing the money pot
+    {
+        String user_answer = get_user_input(question);
+        if (user_answer.equals(answer))
+        {
+            money = money * 2.0;
+            print("Yes, well done the answer is "+ answer+ " well done.\nYour money balance is now: "+money);
+        }
+        else
+        {
+            money = money / 2.0;
+            print("unfortunatly, "+user_answer+" is incorrect.\n"+ answer+" is the correct answer :(\nYour money balance is now: "+money);
+        }
+        return money;
+    }
+
+    public static Double question1 (Double money) //the question and answer for question 1
+    {
+        String question = "What is the name of the band of brothers Noel and Liam?";
+        String answer = "Oasis";
+        money = ask_question(question,answer,money);
+        return money;
+    }
+
+    public static Double question2 (Double money) //the question and answer for question 2
+    {
+        String question = "Whats the best module in Computer Science";
+        String answer = "Procedural Programming";
+        money = ask_question(question,answer,money);
+        return money;
+    }
+
+
+    public static void quiz_level_3() //runs the methods and keeps track of the money
+    {
+        welcome_screen();
+        Double money_pot = 1000.00;
+        money_pot = question1(money_pot);
+        money_pot = question2(money_pot);
+    }
+}
